@@ -7,9 +7,9 @@
     <header>
         <h1>Sofian Photographie</h1>
         <nav>
-            <a href="" @click = "loc = 'louer_app'" :class="{selected :loc=='louer_app'}">Louer un appareil</a>
-            <a href="" @click = "loc = 'louer_stud'" :class="{selected :loc=='louer_stud'}">Louer un studio</a>
-            <a href="" @click = "loc = 'profil'" :class="{selected :loc=='profil'}">Mon compte</a>
+            <a @click = "loc = 'louer_app'" :class="{selected :loc=='louer_app'}">Louer un appareil</a>
+            <a @click = "loc = 'louer_stud'" :class="{selected :loc=='louer_stud'}">Louer un studio</a>
+            <a @click = "loc = 'profil'" :class="{selected :loc=='profil'}">Mon compte</a>
         </nav>
     </header>
 </template>
