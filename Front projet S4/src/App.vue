@@ -7,7 +7,6 @@ router.push("/connexion")
 
 <template>
   <router-link :to="{ name: 'test'}">routeur vers test</router-link>
-  <RouterView/>
   <router-link :to="{ name: 'connexionV2'}">routeur vers connexion</router-link>
   <RouterView/>
 

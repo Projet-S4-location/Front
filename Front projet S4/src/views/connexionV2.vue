@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 </script>
 
 <template>
+    <div class="body">
     <div class="content">
       <div class="login-container">
         <h1>Bienvenue !</h1>
@@ -48,12 +49,13 @@ import { useRouter } from "vue-router";
         </div>
       </section>
     </div>
+</div>
 </template>
 
 <style scoped>
 
 
-template {
+.body {
   background-color: #fb946c;
   width: 100%;
   min-height: 100vh;
