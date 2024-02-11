@@ -1,6 +1,44 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from "vue-router";
+import { useUserStore } from "./../stores/user";
+
+
+const router = useRouter();
+const userStore = useUserStore();
+
+const username = ref('')
+const password = ref('')
+async function envoi() {
+  console.log(username.value, password.value)
+  await fetch("http://51.68.91.213/info9/Back/connexion.php", {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    credentials: 'include',
+    body: JSON.stringify({
+	  "username": username.value,
+    "password": password.value
+  })
+  }).then((Response)=>{
+    
+    if (Response.status == "200"){
+
+      return Response.json().then((data)=>{
+
+        userStore.setUser(data)
+        // userStore.init()
+        //userStore.user = data.id_user
+        username.value = ''
+        password.value = ''
+        router.push("/")
+
+      })
+    }
+    else{
+      username.value = ''
+      password.value = ''
+    }
+    })
+}
 </script>
 
 <template>
@@ -8,19 +46,19 @@ import { useRouter } from "vue-router";
     <div class="content">
       <div class="login-container">
         <h1>Bienvenue !</h1>
-        <form method="post">
+        <div class="form">
           <div class="txt_field">
-            <input type="text" required />
+            <input v-model="username" type="text" required />
             <span></span>
-            <label>Username</label>
+            <label >Username</label>
           </div>
           <div class="txt_field">
-            <input type="password" required />
+            <input v-model="password" type="password" required />
             <span></span>
             <label>Password</label>
           </div>
-          <input type="submit" value="Login" />
-        </form>
+          <input type="submit" value="Login" @click="envoi"/>
+        </div>
       </div>
       <section class="slide_container">
         <div class="slide_wrapper">
@@ -90,12 +128,12 @@ import { useRouter } from "vue-router";
   padding: 0 0 20px 0;
 }
 
-.login-container form {
+.login-container .form {
   padding: 0 40px;
   margin: 30px 0;
 }
 
-form .txt_field {
+.form .txt_field {
   position: relative;
   border-bottom: 2px solid #adadad;
   margin: 30px 0;
