@@ -4,11 +4,6 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/connexionV2",
-      name: "connexionV2",
-      component: () => import("../views/connexionV2.vue"),
-    },
-    {
       path: "/test",
       name: "test",
       component: () => import("../views/test.vue"),
@@ -27,6 +22,11 @@ const router = createRouter({
       path: "/item_shop",
       name: "item_shop",
       component: () => import("../views/item_shop.vue"),
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: () => import("../views/page_admin.vue"),
     },
   ],
 });
