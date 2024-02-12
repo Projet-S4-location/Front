@@ -70,7 +70,7 @@ export const useUserStore = defineStore("user", {
       }
       this.user = null
 
-      let rep = await fetch("http://51.68.91.213/info9/Back/logout", {credentials:"include"})
+      let rep = await fetch("http://51.68.91.213/info9/Back/users/logout", {credentials:"include"})
       return rep.status==204
     }
   },

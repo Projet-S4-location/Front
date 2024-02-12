@@ -11,7 +11,7 @@ const username = ref('')
 const password = ref('')
 async function envoi() {
   console.log(username.value, password.value)
-  await fetch("http://51.68.91.213/info9/Back/connexion.php", {
+  await fetch("http://51.68.91.213/info9/Back/users/connexion.php", {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     credentials: 'include',
     body: JSON.stringify({
