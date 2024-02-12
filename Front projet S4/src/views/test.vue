@@ -1,10 +1,11 @@
 <script setup>
     import test from '../components/test.vue' 
-    import navbar from '../components/header.vue'
-    import { useUserStore } from './../stores/user';
+    import navbar from '../components/header.vue'   
+    import { useUserStore } from "./../stores/user";
 
-    const user = useUserStore();
-    console.log(user.username)
+
+    const userStore = useUserStore();
+    console.log(userStore.username)
 </script>
 
 

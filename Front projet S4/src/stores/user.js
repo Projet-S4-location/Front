@@ -74,8 +74,4 @@ export const useUserStore = defineStore("user", {
       return rep.status==204
     }
   },
-  // testing this
-  onBeforeMount() {
-    this.init(); // Call the init method when the store is imported or a component is mounted
-  }
 });
