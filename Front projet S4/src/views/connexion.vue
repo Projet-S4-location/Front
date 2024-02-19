@@ -42,8 +42,8 @@ async function envoi() {
 </script>
 
 <template>
-    <div class="body">
-    <div class="content">
+  <div class="body">
+      <div class="content">
       <div class="login-container">
         <h1>Bienvenue !</h1>
         <div class="form">
@@ -57,8 +57,9 @@ async function envoi() {
             <span></span>
             <label>Password</label>
           </div>
+          <p>Connectez-vous pour accéder à notre catalogue d'équipements</p>
           <input type="submit" value="Login" @click="envoi"/>
-        </div>
+         </div>
       </div>
       <section class="slide_container">
         <div class="slide_wrapper">
@@ -87,19 +88,20 @@ async function envoi() {
         </div>
       </section>
     </div>
-</div>
+  </div>
 </template>
 
 <style scoped>
 
 
+
 .body {
-  background-color: #fb946c;
+  background-image: url(/images/topography.svg);
+  background-size: 550px;
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
   background-color: #fb946c;
-  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,12 +127,11 @@ async function envoi() {
 
 .login-container h1 {
   text-align: center;
-  padding: 0 0 20px 0;
+  text-shadow: 1px 1px 2px pink;
 }
 
 .login-container .form {
   padding: 0 40px;
-  margin: 30px 0;
 }
 
 .form .txt_field {
@@ -185,6 +186,12 @@ async function envoi() {
   width: 100%;
 }
 
+p{
+  padding-top: 3%;
+  text-align: center;
+  font: italic 1rem "Fira Sans", serif;
+
+}
 input[type="submit"] {
   margin-top: 10%;
   width: 100%;
@@ -239,8 +246,8 @@ input[type="submit"]:hover {
   display: flex;
   column-gap: 1rem;
   position: absolute;
-  bottom: 7.25rem;
-  left: 62%;
+  bottom: 10.25rem;
+  left: 60%;
   transform: translateX(-50%);
   z-index: 1;
 }

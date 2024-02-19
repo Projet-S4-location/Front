@@ -21,5 +21,13 @@ onBeforeMount(() => {
 </template>
 
 
-<style scoped>
+<style>
+
+ body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #fb946c;
+ }
+
 </style>
