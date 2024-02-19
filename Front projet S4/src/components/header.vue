@@ -1,5 +1,9 @@
 <script setup>
     import { ref } from "vue";
+    import { useUserStore } from "./../stores/user";
+    import { useRoute } from 'vue-router'
+
+    const userStore = useUserStore();
     const loc = ref("louer_app")
 </script>
 
@@ -10,6 +14,7 @@
             <a @click = "loc = 'louer_app'" :class="{selected :loc=='louer_app'}">Louer un appareil</a>
             <a @click = "loc = 'louer_stud'" :class="{selected :loc=='louer_stud'}">Louer un studio</a>
             <a @click = "loc = 'profil'" :class="{selected :loc=='profil'}">Mon compte</a>
+            <router-link v-if="userStore.isAdmin" :to="{ name: 'admin'}">Page Admin</router-link>        
         </nav>
     </header>
 </template>
