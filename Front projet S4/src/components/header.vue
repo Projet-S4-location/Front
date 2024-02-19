@@ -19,43 +19,43 @@
     </header>
 </template>
 
-<style>
-body{
-    padding:0;
-    margin:0;
-    font-family: "Space Grotesk", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 100;
-    font-style: normal;
-}
+<style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+
 
 header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f2f2f2;
-    color: #F49141;
-    padding: 40px;
-}
+    background-color: #373737;
+    padding: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 0% 0% 5% 5%;}
 
 nav{
-    color:#F49141;
     display:flex;
-    flex-direction: row;
     column-gap: 20px;
 }
 
-.selected{
-    color:#F6A395;
-}
-
 a{
+    font: 1rem "Fira Sans", Playfair Display;
     text-decoration: none;
-    color: inherit;
 }
 
-a:hover{
+h1{
+    font: 2rem "Fira Sans", Playfair Display;
+
+}
+a, h1{
     color:#F49141;
+    transition: 1s ease-in-out;
+}
+
+h1:hover, a:hover{
+  color: rgb(2, 2, 2);
 }
 
 </style>

@@ -101,8 +101,7 @@ async function envoi() {
 
 <style scoped>
 
-
-
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 .body {
   background-image: url(/images/topography.svg);
   background-size: 550px;
@@ -197,9 +196,9 @@ async function envoi() {
 p{
   padding-top: 3%;
   text-align: center;
-  font: italic 1rem "Fira Sans", serif;
-
+  font: 1rem "Fira Sans", Playfair Display;
 }
+
 input[type="submit"] {
   margin-top: 10%;
   width: 100%;
