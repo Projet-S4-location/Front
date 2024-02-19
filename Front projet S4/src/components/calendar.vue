@@ -180,22 +180,28 @@ function selectDate(day) {
 
   console.log(`tempDate: ${tempDate}`);
   console.log(`endDate: ${endDate.value}`);
+  console.log(`selectedDate: ${selectedDate.value}`);
   console.log(tempDate < endDate.value);
 
   if (!selectedDate.value) {
+    console.log("oui");
     selectedDate.value = tempDate;
+
   } else if (tempDate < selectedDate.value && !startDate.value) {
     startDate.value = tempDate;
     endDate.value = selectedDate.value;
   } else if (tempDate > selectedDate.value && !endDate.value) {
     endDate.value = tempDate;
     startDate.value = selectedDate.value;
+
   } else if (equalDates(tempDate, selectedDate.value) && !startDate.value && !endDate.value) {
     return false;
+
   } else if (startDate.value !== null && equalDates(tempDate, startDate.value)) {
     nextDate.value = 0;
   } else if (endDate.value !== null && equalDates(tempDate, endDate.value)) {
     nextDate.value = 1;
+
   } else if (nextDate.value == 0) {
     calendar.value[startDate.value.getMonth()].days[startDate.value.getDate() - 1].selected = false;
     if (tempDate < endDate.value) {
@@ -252,13 +258,19 @@ function selectDate(day) {
       }
     }
 
-    nextDate.value = -1;
-
     if (startDate.value.getMonth() == endDate.value.getMonth()) {
       console.log("Ohayo");
       validDate.value = true;
     }
+
+    nextDate.value = -1;
   }
+
+  let distance = daysBetween(startDate.value, endDate.value);
+
+  if (distance > 6) {
+      validDate.value = false;
+    }
 
   console.log(`tempDate: ${tempDate}`);
   console.log(`selectedDate: ${selectedDate.value}`);
@@ -270,8 +282,8 @@ function selectDate(day) {
 }
 
 function daysBetween(startDate, endDate) {
-  const startTimestamp = startDate.value.getTime();
-  const endTimestamp = endDate.value.getTime();
+  const startTimestamp = startDate.getTime();
+  const endTimestamp = endDate.getTime();
   const timeDifference = endTimestamp - startTimestamp;
   const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   return daysDifference;
@@ -320,9 +332,9 @@ function incrementMonth() {
 
 function equalDates(date1, date2) {
   return (
-    date1.value.getFullYear() === date2.value.getFullYear() &&
-    date1.value.getMonth() === date2.value.getMonth() &&
-    date1.value.getDate() === date2.value.getDate()
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
   );
 }
 
@@ -370,11 +382,16 @@ function highlightDateRange() {
 
 function dayIsAfter(day, date) {
   let dayDate = new Date(currentYear.value, currentMonth.value, day.value);
-  return dayDate > date.value;
+  let dateDate = new Date(date.value);
+
+  dayDate.setHours(0, 0, 0, 0);
+  dateDate.setHours(0, 0, 0, 0);
+
+  return dayDate >= dateDate;
 }
 
 function isInRange(day, startDate, endDate, includeStartDay = false) {
-  const copyStartDate = new Date(startDate.value);
+  const copyStartDate = new Date(startDate);
 
   if (includeStartDay) {
     copyStartDate.setDate(copyStartDate.getDate() - 1);
@@ -383,10 +400,9 @@ function isInRange(day, startDate, endDate, includeStartDay = false) {
   const startDay = copyStartDate.getDate();
   const startMonth = copyStartDate.getMonth();
   const startYear = copyStartDate.getFullYear();
-
-  const endDay = endDate.value.getDate();
-  const endMonth = endDate.value.getMonth();
-  const endYear = endDate.value.getFullYear();
+  const endDay = endDate.getDate();
+  const endMonth = endDate.getMonth();
+  const endYear = endDate.getFullYear();
 
   return (
     ((day.value > startDay && currentMonth.value === startMonth && currentYear.value === startYear) ||
@@ -417,7 +433,7 @@ function highlightRange(day) {
 }
 
 function disponible(day) {
-  if (!dayIsAfter(day, currentDate.value) || !dayIsAvailable(day)) {
+  if (!dayIsAfter(day, currentDate) || !dayIsAvailable(day)) {
     day.available = true;
     return false;
   }
@@ -453,12 +469,14 @@ function stringToDate(dateString) {
   const convertedDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
   return convertedDate;
 }
+
+generateCalendar();
 </script>
 
 
 <template>
 <div class=resa>
-    <h1>Choisissez vos dates</h1>
+    <h1>Choisissez vos dates UwU</h1>
     <div class="year-name">{{ currentYear }}</div><br>
     <!-- Contrôles pour changer de mois et nom du mois-->
     <div class="controls">
