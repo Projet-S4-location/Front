@@ -32,6 +32,8 @@ async function handleSubmit (){
 	        "username": username.value,
             "password": password.value
         })
+    }).then((Response)=>{
+        console.log(Response)
     })
     // Réinitialiser les champs après la soumission
     username.value = ''
