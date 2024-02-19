@@ -29,9 +29,17 @@ async function envoi() {
         //userStore.user = data.id_user
         username.value = ''
         password.value = ''
-        router.push("test")
+        fetch("http://51.68.91.213/info9/Back/get_session.php", {
+          credentials: 'include'
+        }).then((Response)=>{
+          return Response.json()}).then((data)=>{
+            console.log(data)
+            router.push("item_shop")
 
-      })
+          })
+
+        })
+
     }
     else{
       username.value = ''
