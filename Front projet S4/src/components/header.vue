@@ -9,8 +9,24 @@
 
 <template>
     <header>
-        <h1>Sofian Photographie</h1>
-        <nav>
+        <div class="img_containt">
+        <img
+              id="logo"
+              src="/images/logo/feuille.png"
+              alt="logo de l'entreprise"
+            />   
+            <img
+              id="ligne"
+              src="/images/logo/ligne.png"
+              alt="logo de l'entreprise"
+            />  
+            <img
+              id="nom"
+              src="/images/logo/nom.png"
+              alt="logo de l'entreprise"
+            />   
+        </div>
+                <nav>
             <a @click = "loc = 'louer_app'" :class="{selected :loc=='louer_app'}">Louer un appareil</a>
             <a @click = "loc = 'louer_stud'" :class="{selected :loc=='louer_stud'}">Louer un studio</a>
             <a @click = "loc = 'profil'" :class="{selected :loc=='profil'}">Mon compte</a>
@@ -21,19 +37,41 @@
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
 
 header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #373737;
+    background-color: #F6EAD8;
     padding: 10px;
     padding-left: 2%;
     padding-right: 2%;
     border-radius: 0% 0% 5% 5%;}
+
+.img_containt {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+#logo {
+    width: 80px;
+    height: 20px;
+    padding-right: 15px;
+}
+#ligne {
+ height: 30px;
+ width: 3px;
+ padding-right: 15px;
+
+}
+#nom {
+    width: 150px;
+    height: 10px;
+
+}
 
 nav{
     display:flex;
@@ -41,16 +79,17 @@ nav{
 }
 
 a{
-    font: 1rem "Fira Sans", Playfair Display;
-    text-decoration: none;
+    font: 0.9rem "Roboto Slab", medium;
+    text-decoration: underline ;
+    
 }
 
 h1{
-    font: 2rem "Fira Sans", Playfair Display;
+    font: 0.9rem "Roboto Slab", medium;
 
 }
 a, h1{
-    color:#F49141;
+    color:rgb(2, 2, 2);
     transition: 1s ease-in-out;
 }
 

@@ -150,7 +150,7 @@ async function envoi() {
 
 .login-container h1 {
   text-align: center;
-  text-shadow: 1px 1px 2px pink;
+  text-shadow: 1px 1px 2px #fb946c;
 }
 
 .login-container .form {
@@ -212,7 +212,7 @@ async function envoi() {
 p{
   padding-top: 3%;
   text-align: center;
-  font: 1rem "Fira Sans", Playfair Display;
+  font: 0.9rem "Fira Sans", Playfair Display;
 }
 
 input[type="submit"] {
@@ -227,11 +227,12 @@ input[type="submit"] {
   font-weight: 700;
   cursor: pointer;
   outline: none;
+  transition: ease-in-out 0.5s;
 }
 
 input[type="submit"]:hover {
+  transform: translate(0px, -2px);
   border-color: #1a1a1a;
-  transition: 0.5s;
 }
 
 .slide_container {
