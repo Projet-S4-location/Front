@@ -334,7 +334,7 @@ input[type="submit"]:hover {
   display: flex;
   column-gap: 1rem;
   position: absolute;
-  bottom: 9.60rem;
+  bottom: 10.3rem;
   left: 60.5%;
   transform: translateX(-50%);
   z-index: 1;
