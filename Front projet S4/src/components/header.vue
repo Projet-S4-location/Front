@@ -10,6 +10,12 @@
 <template>
     <header>
         <div class="img_containt">
+            <img
+              id="logo"
+              src="/images/logo/chrome2.png"
+              alt="logo de l'entreprise"
+            /> 
+            <!-- 
         <img
               id="logo"
               src="/images/logo/feuille.png"
@@ -24,13 +30,16 @@
               id="nom"
               src="/images/logo/nom.png"
               alt="logo de l'entreprise"
-            />   
-        </div>
-                <nav>
-            <a @click = "loc = 'louer_app'" :class="{selected :loc=='louer_app'}">Louer un appareil</a>
-            <a @click = "loc = 'louer_stud'" :class="{selected :loc=='louer_stud'}">Louer un studio</a>
-            <a @click = "loc = 'profil'" :class="{selected :loc=='profil'}">Mon compte</a>
-            <router-link v-if="userStore.isAdmin" :to="{ name: 'admin'}">Page Admin</router-link>        
+            />  --> 
+        </div> 
+        
+        <nav>
+            <ul>
+                <a @click = "loc = 'louer_app'" :class="{selected :loc=='louer_app'}">Louer un appareil</a>
+                <a @click = "loc = 'louer_stud'" :class="{selected :loc=='louer_stud'}">Louer un studio</a>
+                <a @click = "loc = 'profil'" :class="{selected :loc=='profil'}">Mon compte</a>
+                <router-link v-if="userStore.isAdmin" :to="{ name: 'admin'}">Page Admin</router-link>        
+             </ul>
         </nav>
     </header>
 </template>
@@ -44,11 +53,9 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #F6EAD8;
+    background-color: #131215;
     padding: 10px;
-    padding-left: 2%;
-    padding-right: 2%;
-    border-radius: 0% 0% 5% 5%;}
+}
 
 .img_containt {
     align-items: center;
@@ -57,11 +64,11 @@ header{
 }
 
 #logo {
-    width: 80px;
-    height: 20px;
-    padding-right: 15px;
+    width: 90px;
+    height: 70px;
 }
-#ligne {
+
+/* #ligne {
  height: 30px;
  width: 3px;
  padding-right: 15px;
@@ -71,17 +78,65 @@ header{
     width: 150px;
     height: 10px;
 
+} */
+ul { 
+  padding: 0; 
+  list-style: none; 
+  display: table;
+  width: 700px;
+  text-align: center;
+}
+li { 
+  display: table-cell; 
+  position: relative; 
+  padding: 15px 0;
+}
+a {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  font-size: 0.7rem; 
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
 }
 
-nav{
+a:after {  
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+a:hover:after { 
+  width: 100%; 
+  left: 0; 
+}
+
+/* .selected:after { 
+  width: 100%; 
+  left: 0; 
+} */
+
+/* nav{
     display:flex;
     column-gap: 20px;
 }
 
 a{
     font: 0.9rem "Roboto Slab", medium;
-    text-decoration: underline ;
-    
+    text-decoration: none;
+    transition: color 0.3s ease; 
+}
+
+a:hover {
+    text-decoration: blue;
 }
 
 h1{
@@ -89,12 +144,12 @@ h1{
 
 }
 a, h1{
-    color:rgb(2, 2, 2);
+    color:rgb(255, 255, 255);
     transition: 1s ease-in-out;
 }
 
 h1:hover, a:hover{
-  color: rgb(2, 2, 2);
-}
+  color: rgb(255, 255, 255);
+} */
 
 </style>
