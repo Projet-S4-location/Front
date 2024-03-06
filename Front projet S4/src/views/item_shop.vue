@@ -6,17 +6,22 @@
     const items = ref(null)
 
     async function fetchData() {
-    items.value = null
-    const res = await fetch(
-        `http://51.68.91.213/info9/Back/products/get_products.php`,{
-            credentials: "include"
-        }
-    )
-    items.value = await res.json()
+        items.value = null
+        const res = await fetch(
+            `http://51.68.91.213/info9/Back/products/get_products.php`,{
+                credentials: "include"
+            }
+        )
+        items.value = await res.json()
     }
+    fetchData().then(() => {
+        if (items.value) {
+            items.value.forEach(async (item) => {
+                item.image = `http://51.68.91.213/info9/Back/products/get_image.php?id=${item.id_product}`
+            })
+        }
+    })
 
-    fetchData(); 
-    
 
 </script>
 
@@ -26,7 +31,7 @@
     <p>barre de recherche + calendrier</p>
     <main>
         <div v-for ="item in items">
-            <item :name = "item['name']" :tags = "['test', 'test2']" :prix = "item['price']" :image = "'a'"></item>
+            <item :name = "item['name']" :tags = "['test', 'test2']" :prix = "item['price']" :image = "item['image']"></item>
         </div>
         </main>
     <p>footer</p>
