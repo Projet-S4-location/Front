@@ -13,14 +13,24 @@
             }
         )
         items.value = await res.json()
+
+        // Attendre la résolution de toutes les promesses de fetchTags
+        await Promise.all(items.value.map(async (item) => {
+            item.image = `http://51.68.91.213/info9/Back/products/get_image.php?id=${item.id_product}`
+            item.tags = await fetchTags(item.id_product)
+        }))
     }
-    fetchData().then(() => {
-        if (items.value) {
-            items.value.forEach(async (item) => {
-                item.image = `http://51.68.91.213/info9/Back/products/get_image.php?id=${item.id_product}`
-            })
-        }
-    })
+
+    async function fetchTags(id){
+        const res = await fetch(
+            `http://51.68.91.213/info9/Back/products/get_tag_by_product.php?id=${id}`,{
+                credentials: "include"
+            }
+        )
+        return await res.json()
+    }
+
+    fetchData()
 
 
 </script>
@@ -31,7 +41,7 @@
     <p>barre de recherche + calendrier</p>
     <main>
         <div v-for ="item in items">
-            <item :name = "item['name']" :tags = "['test', 'test2']" :prix = "item['price']" :image = "item['image']"></item>
+            <item :name = "item['name']" :tags = "item['tags']" :prix = "item['price']" :image = "item['image']"></item>
         </div>
         </main>
     <p>footer</p>
