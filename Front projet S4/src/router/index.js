@@ -24,9 +24,14 @@ const router = createRouter({
       component: () => import("../views/item_shop.vue"),
     },
     {
+      path: "/studio_shop",
+      name: "studio_shop",
+      component: () => import("../views/studio_shop.vue"),
+    },
+    {
       path: "/admin",
       name: "admin",
-      component: () => import("../views/page_admintest.vue"),
+      component: () => import("../views/page_admin.vue"),
     },
   ],
 });
