@@ -150,6 +150,7 @@ async function envoi() {
 .wave-container {
   position: relative;
   margin-bottom: 100px;
+
 }
 
 .wave {
@@ -158,6 +159,7 @@ async function envoi() {
   left: 50%;
   transform: translateX(-50%);
   font-size: 2.6em;
+
 }
 
 .wave-blue {

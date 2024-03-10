@@ -111,7 +111,7 @@ a:after {
   left: 50%;
   position: absolute;
   background: #fff;
-  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  transition: 0.3s;
   width: 0;
 }
 a:hover:after { 
