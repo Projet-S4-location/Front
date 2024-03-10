@@ -70,7 +70,7 @@ async function envoi() {
       <div class="content">
       <div class="login-container">
         <div class="wave-container">
-          <h1 class="wave wave-blue">
+          <h1 class="wave">
             Bienvenue!
           </h1>
         </div>
@@ -121,7 +121,8 @@ async function envoi() {
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 .body {
   display: flex;
   align-items: center;
@@ -159,10 +160,6 @@ async function envoi() {
   left: 50%;
   transform: translateX(-50%);
   font-size: 2.6em;
-
-}
-
-.wave-blue {
   color: #000000;
   animation: animate 4s ease-in-out infinite;
 }
@@ -274,8 +271,10 @@ async function envoi() {
 p{
   padding-top: 3%;
   text-align: center;
-  font: 0.9rem "Fira Sans", Playfair Display;
-  letter-spacing: 0.05rem;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500; 
+   letter-spacing: 0.05rem;
 }
 
 input[type="submit"] {
@@ -322,7 +321,9 @@ input[type="submit"]:hover {
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   box-shadow: 0 1.5rem 3rem -0.75rem hsl(0, 0%, 0%, 0.25);
+  border-radius: 10%;
 }
+
 
 .slider img {
   flex: 1 0 100%;
