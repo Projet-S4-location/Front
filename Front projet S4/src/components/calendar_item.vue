@@ -476,7 +476,6 @@ generateCalendar();
 
 <template>
 <div class=resa>
-    <h1>Choisissez vos dates UwU</h1>
     <div class="year-name">{{ currentYear }}</div><br>
     <!-- Contrôles pour changer de mois et nom du mois-->
     <div class="controls">
@@ -493,14 +492,17 @@ generateCalendar();
             Calendrier n'est pas défini ou vide
         </div>
     </div>
+    <p>error</p>
 </div>
 </template>
 
 <style>
+
 .year-name {
   font-size: 18px;
   color: #555;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .controls {
