@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="item-card">
+    <div class="container">
         <div class="item-image">
             <img :src="props.image" alt="Item Image">
         </div>
@@ -21,7 +21,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 /* Item Card Styling */
-.item-card {
+.container {
     border: 1px solid #ddd;
     border-radius: 6px;
     overflow: hidden;
