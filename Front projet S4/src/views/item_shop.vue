@@ -8,6 +8,8 @@
     const displayitems = ref(null)
     const rech = ref('')
     const showCal = ref(false)
+    const tags = ref(null)
+    const selected_tag = ref('Choisissez un tag')
 
     async function fetchData() {
         items.value = null
@@ -23,6 +25,13 @@
             item.image = `http://51.68.91.213/info9/Back/products/get_image.php?id=${item.id_product}`
             item.tags = await fetchTags(item.id_product)
         }))
+
+        const res2 = await fetch(
+            `http://51.68.91.213/info9/Back/tags/get_all_tags.php`,{
+                credentials: "include"
+            }
+        )
+        tags.value = await res2.json()
 
         displayitems.value = items.value;
 
@@ -55,6 +64,23 @@
         })
     }
 
+    watch(selected_tag, (newValue, oldValue) => {
+        filterTag(newValue)
+    })
+
+    function filterTag(tag) {
+
+        if (tag == "Choisissez un tag" || tag == "") {
+            displayitems.value = items.value
+            return
+        }
+
+        
+        displayitems.value = items.value.filter(item => {
+            return item.tags.includes(tag)
+        })
+    }
+
     fetchData()
 
 </script>
@@ -64,6 +90,10 @@
     <navbar :loc="'louer_app'"></navbar>
     <div class = "shearch">
         <input type="text" v-model="rech">
+        <select name="tags" id="tag-select" v-model = "selected_tag">
+            <option value="">Choisissez un tag</option>
+            <option v-for = "tag in tags" :value="tag[0]">{{tag[0]}}</option>
+        </select>
         <button v-on:click = "showCal = !showCal" class = "calendar-button">Calendar</button>
         <calendar class = "calendar" v-if ="showCal"></calendar>
     </div>
