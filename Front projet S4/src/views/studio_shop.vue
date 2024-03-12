@@ -77,8 +77,9 @@
 <style scoped>
 main{
     display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 /* Input styling */
 input[type="text"] {
