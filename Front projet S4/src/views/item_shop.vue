@@ -1,7 +1,9 @@
 <script setup>
     import navbar from '../components/header.vue'
     import item from '../components/item.vue'   
-    import calendar from '../components/calendar_item.vue'   
+    import calendar from '../components/calendar_item.vue'  
+    import pied from '../components/pied.vue'
+ 
     import { ref, watch } from 'vue'
 
     const items = ref(null)
@@ -101,12 +103,11 @@
         <div v-for="item in displayitems" :key="item.id_product">
             <item :name="item.name" :tags="item.tags" :prix="item.price" :image="item.image" class="item"></item>
         </div>
-
         <div v-if = "!displayitems " class="loading">
             Chargement...
         </div>
     </main>
-    <p>footer</p>
+    <pied></pied>
 </template>
 
 <style scoped>
@@ -164,4 +165,4 @@
         margin-top: 20px;
     }
 </style>
-
+../components/pied.vue

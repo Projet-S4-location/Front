@@ -22,6 +22,7 @@ const nb_p = ref(1);
 const com = ref("");
 const petit_d = ref(0);
 const clicked = ref(false);
+const dureeMax = ref(7);
 
 
 function insert_resa() {
@@ -266,11 +267,9 @@ function selectDate(day) {
     nextDate.value = -1;
   }
 
-  let distance = daysBetween(startDate.value, endDate.value);
-
-  if (distance > 6) {
-      validDate.value = false;
-    }
+  if (!estInferieurA()) {
+    validDate.value = false;
+  }
 
   console.log(`tempDate: ${tempDate}`);
   console.log(`selectedDate: ${selectedDate.value}`);
@@ -279,6 +278,19 @@ function selectDate(day) {
   console.log(tempDate < startDate.value);
   console.log(`UwU ${nextDate.value}`);
   console.log('Checking: ', startDate.value.getMonth(), endDate.value.getMonth(), validDate.value);
+}
+
+// Fonction qui retourne vraie si la durée sélectionnée est plus courte que dureeMax et false sinon
+function estInferieurA() {
+
+if (startDate.value !== null && endDate.value !== null) {
+  let distance = daysBetween(startDate.value, endDate.value);
+  console.log(distance);
+  if (distance >= dureeMax.value) {
+    return false;              // Cas où durée > DureeMax
+  }
+}
+return true;
 }
 
 function daysBetween(startDate, endDate) {
@@ -492,7 +504,7 @@ generateCalendar();
             Calendrier n'est pas défini ou vide
         </div>
     </div>
-    <p>error</p>
+    <p v-if="!estInferieurA()" class="errorCalendar"> Veuillez choisir une durée de moins de 7 jours</p>
 </div>
 </template>
 
@@ -590,5 +602,9 @@ generateCalendar();
 .invalid {
   background-color: rgb(255, 0, 0);
   color: white;
+}
+
+.errorCalendar {
+  color:#e84040;
 }
 </style>
