@@ -11,7 +11,7 @@
     const rech = ref('')
     const showCal = ref(false)
     const tags = ref(null)
-    const selected_tag = ref('Choisissez un tag')
+    const selected_tag = ref('')
 
     async function fetchData() {
         items.value = null
@@ -72,7 +72,7 @@
 
     function filterTag(tag) {
 
-        if (tag == "Choisissez un tag" || tag == "") {
+        if (tag == "") {
             displayitems.value = items.value
             return
         }
@@ -93,7 +93,7 @@
     <div class = "shearch">
         <input type="text" v-model="rech">
         <select name="tags" id="tag-select" v-model = "selected_tag">
-            <option value="">Choisissez un tag</option>
+            <option value="">Tout</option>
             <option v-for = "tag in tags" :value="tag[0]">{{tag[0]}}</option>
         </select>
         <button v-on:click = "showCal = !showCal" class = "calendar-button">Calendar</button>
