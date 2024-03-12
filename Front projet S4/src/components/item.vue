@@ -3,62 +3,72 @@
 </script>
 
 <template>
-    <div class="container">
-        <h1>{{props.name}}</h1>
-        <a v-for="tag in props.tags">{{ tag }}</a>
-        <h2>{{props.prix}}€/jour</h2>
-        <img :src = "props.image">
+    <div class="item-card">
+        <div class="item-image">
+            <img :src="props.image" alt="Item Image">
+        </div>
+        <div class="item-details">
+            <h2 class="item-name">{{props.name}}</h2>
+            <div class="item-tags">
+                <a v-for="tag in props.tags" :key="tag" class="tag">{{ tag }}</a>
+            </div>
+            <p class="item-price">{{props.prix}}€/jour</p>
+        </div>
     </div>
 </template>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-    /* Container styling */
-    .container {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin: 10px;
-        width: 200px;
-        display: inline-block;
-        vertical-align: top;
-    }
+/* Item Card Styling */
+.item-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 10px;
+    width: 250px;
+}
 
-    /* Title styling */
-    h1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: "Inter", sans-serif; 
-         font-weight: 800;
-         padding-bottom: 2%;
-        font-size: 1.2rem;
-        margin-bottom: 5px;
-    }
+/* Item Image Styling */
+.item-image img {
+    width: 100%;
+    display: block;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
 
-    /* Tag styling */
-    a {
-        display: inline-block;
-        background-color: #f0f0f0;
-        color: #333;
-        padding: 3px 8px;
-        border-radius: 3px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        text-decoration: none;
-    }
+/* Item Details Styling */
+.item-details {
+    padding: 12px;
+}
 
-    /* Price styling */
-    h2 {
-        font-size: 16px;
-        color: #007bff;
-        margin: 10px 0;
-    }
+/* Item Name Styling */
+.item-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+}
 
-    /* Image styling */
-    img {
-        width: 100%;
-        border-radius: 5px;
-    }
+/* Item Tags Styling */
+.item-tags {
+    margin-top: 6px;
+}
+
+.tag {
+    background-color: #007bff;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+/* Item Price Styling */
+.item-price {
+    color: #007bff;
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
 </style>
