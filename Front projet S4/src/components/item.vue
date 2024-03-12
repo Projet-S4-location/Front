@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div>
+    <div class="container">
         <h1>{{props.name}}</h1>
         <a v-for="tag in props.tags">{{ tag }}</a>
         <h2>{{props.prix}}€/jour</h2>
@@ -12,10 +12,10 @@
 </template>
 
 <style scoped>
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
     /* Container styling */
-    div {
+    .container {
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 10px;
@@ -27,7 +27,13 @@
 
     /* Title styling */
     h1 {
-        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Inter", sans-serif; 
+         font-weight: 800;
+         padding-bottom: 2%;
+        font-size: 1.2rem;
         margin-bottom: 5px;
     }
 
