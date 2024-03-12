@@ -9,19 +9,7 @@ const userStore = useUserStore();
 
 const username = ref('')
 const password = ref('')
-function checkCookiesEnabled() {
-    var cookieEnabled = navigator.cookieEnabled;
-    if (cookieEnabled === undefined) {
-        var cookieEnabled = true;
-        var testCookie = document.createElement("cookie");
-        testCookie.setAttribute("name", "testcookie");
-        document.body.appendChild(testCookie);
-        cookieEnabled = testCookie.value !== "";
-        document.body.removeChild(testCookie);
-    }
-    return cookieEnabled;
-}
-console.log(checkCookiesEnabled());
+
 async function envoi() {
   console.log(username.value, password.value)
   await fetch("http://51.68.91.213/info9/Back/users/connexion.php", {
@@ -36,10 +24,9 @@ async function envoi() {
     if (Response.status == "200"){
 
       return Response.json().then((data)=>{
-
+        console.log(data)
         userStore.setUser(data)
-        // userStore.init()
-        //userStore.user = data.id_user
+        
         username.value = ''
         password.value = ''
         fetch("http://51.68.91.213/info9/Back/get_session.php", {
