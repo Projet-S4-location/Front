@@ -69,7 +69,11 @@ async function envoi() {
   <div class="body">
       <div class="content">
       <div class="login-container">
-        <h1>Bienvenue !</h1>
+        <div class="wave-container">
+          <h1 class="wave">
+            Bienvenue!
+          </h1>
+        </div>
         <div class="form">
           <div class="txt_field">
             <input v-model="username" type="text" required />
@@ -90,19 +94,19 @@ async function envoi() {
           <div class="slider">
             <img
               id="slide_1"
-              src="/images/camera0.jpeg"
+              src="/images/camera10.jpeg"
               alt="Image représentant 2 appareils photo"
             />
             <img
               id="slide_2"
-              src="/images/camera1.jpeg"
+              src="/images/camera11.jpeg"
               alt="Représentation d'une caméra professionnelle utilisée lors de concerts"
             />
-            <img
+             <img
               id="slide_3"
-              src="/images/camera2.jpeg"
+              src="/images/camera12.jpeg"
               alt="Image contentant un drone permetant de faire de la vidéo"
-            />
+            /> 
             <div class="slider_nav">
               <a href="#slide_1"></a>
               <a href="#slide_2"></a>
@@ -117,19 +121,79 @@ async function envoi() {
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 .body {
-  background-image: url(/images/topography.svg);
-  background-size: 550px;
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-  background-color: #fb946c;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+	--u: 10px;
+	--c1: #fbf9fe;
+	--c2: #02b6e7;
+	--c3: #00699b;
+	--gp: 50%/ calc(var(--u) * 16.9) calc(var(--u) * 12.8);
+	background: 
+		conic-gradient(from 122deg at 50% 85.15%, var(--c2) 0 58deg, var(--c3) 0 116deg, #fff0 0 100%) var(--gp),
+		conic-gradient(from 122deg at 50% 72.5%, var(--c1) 0 116deg, #fff0 0 100%) var(--gp),
+		conic-gradient(from 58deg at 82.85% 50%, var(--c3) 0 64deg, #fff0 0 100%) var(--gp),
+		conic-gradient(from 58deg at 66.87% 50%, var(--c1) 0 64deg, var(--c2) 0 130deg, #fff0 0 100%) var(--gp),
+		conic-gradient(from 238deg at 17.15% 50%, var(--c2) 0 64deg, #fff0 0 100%) var(--gp),
+		conic-gradient(from 172deg at 33.13% 50%, var(--c3) 0 66deg, var(--c1) 0 130deg, #fff0 0 100%) var(--gp),
+		linear-gradient(98deg, var(--c3) 0 15%, #fff0 calc(15% + 1px) 100%) var(--gp),
+		linear-gradient(-98deg, var(--c2) 0 15%, #fff0 calc(15% + 1px) 100%) var(--gp),
+		conic-gradient(from -58deg at 50.25% 14.85%, var(--c3) 0 58deg, var(--c2) 0 116deg, #fff0 0 100%) var(--gp),
+		conic-gradient(from -58deg at 50% 28.125%, var(--c1) 0 116deg, #fff0 0 100%) var(--gp),
+		linear-gradient(90deg, var(--c2) 0 50%, var(--c3) 0 100%) var(--gp);
 }
 
+
+.wave-container {
+  position: relative;
+  margin-bottom: 100px;
+
+}
+
+.wave {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.6em;
+  color: #000000;
+  animation: animate 4s ease-in-out infinite;
+}
+
+@keyframes animate {
+  0%,
+  100% {
+    clip-path: polygon(
+      0% 45%,
+      16% 44%,
+      33% 50%,
+      54% 60%,
+      70% 61%,
+      84% 59%,
+      100% 52%,
+      100% 100%,
+      0% 100%
+    );
+  }
+
+  50% {
+    clip-path: polygon(
+      0% 60%,
+      15% 65%,
+      34% 66%,
+      51% 62%,
+      67% 50%,
+      84% 45%,
+      100% 46%,
+      100% 100%,
+      0% 100%
+    );
+  }
+}
 .content {
   display: flex;
   background-color: aliceblue;
@@ -139,7 +203,6 @@ async function envoi() {
 }
 
 .login-container {
-  padding-top: 20px;
   flex: 1;
   height: 450px;
   border-radius: 8%;
@@ -148,10 +211,6 @@ async function envoi() {
   width: 400px;
 }
 
-.login-container h1 {
-  text-align: center;
-  text-shadow: 1px 1px 2px #fb946c;
-}
 
 .login-container .form {
   padding: 0 40px;
@@ -212,7 +271,10 @@ async function envoi() {
 p{
   padding-top: 3%;
   text-align: center;
-  font: 0.9rem "Fira Sans", Playfair Display;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500; 
+   letter-spacing: 0.05rem;
 }
 
 input[type="submit"] {
@@ -241,7 +303,7 @@ input[type="submit"]:hover {
   height: 350px;
   flex: 1;
   border-radius: 8%;
-  background-color: #fae4d6;
+  background-color: #78e0fd;
   margin: 20px 20px 20px 0;
 }
 
@@ -252,28 +314,34 @@ input[type="submit"]:hover {
 }
 
 .slider {
+  width: 310px;
+  height: 350px;
   display: flex;
-  aspect-ratio: 16/9;
   overflow: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   box-shadow: 0 1.5rem 3rem -0.75rem hsl(0, 0%, 0%, 0.25);
+  border-radius: 10%;
 }
+
 
 .slider img {
   flex: 1 0 100%;
   scroll-snap-align: start;
   object-fit: cover;
+  width: 250px;
+  height: 350px;
 }
 
 .slider_nav {
   display: flex;
   column-gap: 1rem;
   position: absolute;
-  bottom: 10.25rem;
-  left: 60%;
+  bottom: 10.3rem;
+  left: 60.5%;
   transform: translateX(-50%);
   z-index: 1;
+
 }
 
 .slider_nav a {
