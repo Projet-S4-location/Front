@@ -1,85 +1,3 @@
-<template>
-    <table>
-        <tr>
-            <td>
-                id
-            </td>
-            <td>
-                nom
-            </td>
-            <td>
-                type
-            </td>
-            <td>
-                description
-            </td>
-            <td>
-                prix
-            </td>
-            <td>
-                photo
-            </td>
-        </tr>
-        <tr v-for="produit in produits">
-            <td>
-                {{ produit[0] }}
-            </td>
-            <td>
-                <input type="text" v-model="produit[1]"></input>
-            </td>
-            <td>
-                <select name="category" v-model="produit[2]">
-                    <option value="camera">Camera</option>
-                    <option value="studio">Studio</option>
-                </select>
-            </td>
-            <td>
-                <input type="text" v-model="produit[3]"></input>
-            </td>
-            <td>
-                <input type="text" v-model="produit[4]"></input>
-            </td>
-            <td>
-                <div class="image-container">
-                    <img class="image" :src="produit['image']">
-                </div>
-                <input type="file" ref="fileInputs" @change="handleFileChange($event, produit[0])" multiple />
-
-            </td>
-            <td>
-                <button @click="modifierProduit(produit[0], produit[1], produit[2], produit[3], produit[4])">
-                    Modifier
-                </button>
-            </td>
-            <td>
-                <button @click="supprimerProduit(produit[0])">
-                    X
-                </button>
-            </td>
-        </tr>
-    </table>
-    <form v-if="userStore.isAdmin" @submit.prevent="ajoutProduit">
-        <h2>Ajouter un produit</h2>
-        <label for="name">Nom du produit:</label>
-        <input type="text" v-model="nom" required>
-
-        <label for="type">Type:</label>
-        <select name="type" v-model="type">
-            <option value="">--Choisissez une option--</option>
-            <option value="camera">Camera</option>
-            <option value="studio">Studio</option>
-        </select>
-        <label for="description">Description:</label>
-        <input type="text" v-model="description" required>
-        <label for="prix">Prix:</label>
-        <input type="text" v-model="prix" required>
-        <label for="image">Image:</label>
-        <input type="file" id="image" multiple />
-        <button type="submit">Inscrire</button>
-
-    </form>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 import { useUserStore } from '../stores/user';
@@ -172,18 +90,107 @@ recupereProduits()
 
 </script>
 
+<template>
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Photo</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="produit in produits">
+                <td>{{ produit[0] }}</td>
+                <td><input type="text" v-model="produit[1]"></td>
+                <td>
+                    <select name="category" v-model="produit[2]">
+                        <option value="camera">Camera</option>
+                        <option value="studio">Studio</option>
+                    </select>
+                </td>
+                <td><input type="text" v-model="produit[3]"></td>
+                <td><input type="text" v-model="produit[4]"></td>
+                <td>
+                    <div class="image-container">
+                        <img class="image" :src="produit['image']">
+                    </div>
+                    <input type="file" ref="fileInputs" @change="handleFileChange($event, produit[0])" multiple />
+                </td>
+                <td><button @click="modifierProduit(produit[0], produit[1], produit[2], produit[3], produit[4])">Modifier</button></td>
+                <td><button class="delete-button" @click="supprimerProduit(produit[0])">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <form class="add-product-form" v-if="userStore.isAdmin" @submit.prevent="ajoutProduit">
+        <h2>Ajouter un produit</h2>
+        <div class="form-group">
+            <label for="name">Nom du produit:</label>
+            <input type="text" v-model="nom" required>
+        </div>
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <select name="type" v-model="type">
+                <option value="">--Choisissez une option--</option>
+                <option value="camera">Camera</option>
+                <option value="studio">Studio</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" v-model="description" required>
+        </div>
+        <div class="form-group">
+            <label for="prix">Prix:</label>
+            <input type="text" v-model="prix" required>
+        </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" id="image" multiple />
+        </div>
+        <button type="submit">Ajouter</button>
+    </form>
+</template>
+
 <style scoped>
-form {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-.container {
-    display: flex;
+.product-table th,
+.product-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
 
+.product-table th {
+    background-color: #f2f2f2;
+}
+
+.add-product-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 40px auto;
+    max-width: 400px;
+}
+
+.add-product-form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
 }
 
 label {
@@ -193,6 +200,7 @@ label {
 
 input[type="text"],
 input[type="password"],
+select,
 button {
     width: 100%;
     padding: 10px;
@@ -201,32 +209,35 @@ button {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
 .image-container {
-    width: 200px;
-    height: 200px;
+    width: 150px; /* Augmente la largeur du conteneur */
+    height: 150px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
-    /* Pour cacher toute partie de l'image qui dépasse du conteneur */
+    border-radius: 5px;
 }
 
 .image {
     width: 100%;
-    /* Pour que l'image occupe tout l'espace du conteneur */
     height: 100%;
-    /* Pour que l'image occupe tout l'espace du conteneur */
     object-fit: cover;
-    /* Recadre l'image pour remplir le conteneur en conservant les proportions */
-    object-position: center;
-    /* Centre l'image à l'intérieur du conteneur */
 }
+
+.delete-button:hover {
+    background-color: #d84315;
+}
+
 </style>

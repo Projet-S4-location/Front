@@ -155,7 +155,7 @@ button {
 }
 
 button {
-    background-color: #007bff; /* Changement de couleur */
+    background-color: #007bff; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -163,6 +163,6 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3; /* Changement de couleur au survol */
+    background-color: #0056b3;
 }
 </style>
