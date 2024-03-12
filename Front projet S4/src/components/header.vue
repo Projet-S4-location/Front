@@ -35,10 +35,10 @@
         
         <nav>
             <ul>
-                <a @click = "loc = 'louer_app'" :class="{selected :loc=='louer_app'}">Louer un appareil</a>
-                <a @click = "loc = 'louer_stud'" :class="{selected :loc=='louer_stud'}">Louer un studio</a>
-                <a @click = "loc = 'profil'" :class="{selected :loc=='profil'}">Mon compte</a>
-                <router-link v-if="userStore.isAdmin" :to="{ name: 'admin'}">Page Admin</router-link>        
+              <router-link :to="{ name: 'item_shop'}">Louer un appareil</router-link>        
+            <router-link :to="{ name: 'studio_shop'}">Louer un studio</router-link>        
+            <a @click = "loc = 'profil'" :class="{selected :loc=='profil'}">Mon compte</a>
+            <router-link v-if="userStore.isAdmin" :to="{ name: 'admin'}">Page Admin</router-link>              
              </ul>
         </nav>
     </header>
