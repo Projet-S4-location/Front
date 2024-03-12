@@ -16,9 +16,10 @@
 
         // Attendre la résolution de toutes les promesses de fetchTags
         await Promise.all(studios.value.map(async (studio) => {
-            studios.image = `http://51.68.91.213/info9/Back/products/get_image.php?id=${studio.id_product}`
-            studios.tags = await fetchTags(studio.id_product)
+            studio.image = `http://51.68.91.213/info9/Back/products/get_image.php?id=${studio.id_product}`
+            studio.tags = await fetchTags(studio.id_product)
         }))
+        console.log(studios.value)
     }
 
     async function fetchTags(id){
