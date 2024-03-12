@@ -332,6 +332,10 @@ function resetSelection() {
       day.selected = false;
     }
   }
+endDate.value = null;
+selectedDate.value = null;
+endDate.value = null;
+validDate.value = true;
 }
 
 function incrementMonth() {
@@ -504,6 +508,7 @@ generateCalendar();
             Calendrier n'est pas défini ou vide
         </div>
     </div>
+    <div class="reinitialise" @click="resetSelection"> <span id="resetbutton">Réinitialiser</span> </div>
     <p v-if="!estInferieurA()" class="errorCalendar"> Veuillez choisir une durée de moins de 7 jours</p>
 </div>
 </template>
@@ -606,5 +611,15 @@ generateCalendar();
 
 .errorCalendar {
   color:#e84040;
+}
+
+.reinitialise {
+  display: inline-block;
+  text-align: center;
+}
+#resetbutton {
+  border: solid black 2px;
+
+  background-color: #e84040;
 }
 </style>

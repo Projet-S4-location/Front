@@ -194,6 +194,8 @@ function resetSelection() {
       day.selected = false;
     }
   }
+  previousDate.value = null;
+  selectedDate.value = null;
 }
 
 function incrementMonth() {
