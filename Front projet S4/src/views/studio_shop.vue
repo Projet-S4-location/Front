@@ -1,7 +1,8 @@
 <script setup>
     import navbar from '../components/header.vue'
     import item from '../components/item.vue'  
-    import calendar from '../components/calendar_studio.vue'   
+    import calendar from '../components/calendar_studio.vue'  
+    import pied from '../components/pied.vue' 
     import { ref, watch } from 'vue'
 
     const displaystudios = ref(null)
@@ -71,7 +72,7 @@
             <item :name = "studio['name']" :tags = "studio['tags']" :prix = "studio['price']" :image = "studio['image']"></item>
         </div>
         </main>
-    <p>footer</p>
+        <pied></pied>
 </template>
 
 <style scoped>

@@ -508,7 +508,7 @@ generateCalendar();
 </div>
 </template>
 
-<style scoped>
+<style >
 
 .year-name {
   font-size: 18px;
