@@ -161,7 +161,7 @@ async function envoi() {
   transform: translateX(-50%);
   font-size: 2.6em;
   color: #000000;
-  animation: animate 4s ease-in-out infinite;
+  /* animation: animate 4s ease-in-out infinite; */
 }
 
 @keyframes animate {
