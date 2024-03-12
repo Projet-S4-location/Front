@@ -74,7 +74,7 @@ async function envoi() {
             Bienvenue!
           </h1>
         </div>
-        <div class="form">
+        <form class="form" @submit.prevent="envoi">
           <div class="txt_field">
             <input v-model="username" type="text" required />
             <span></span>
@@ -86,8 +86,8 @@ async function envoi() {
             <label>Password</label>
           </div>
           <p>Connectez-vous pour accéder à notre catalogue d'équipements</p>
-          <input type="submit" value="Login" @click="envoi"/>
-         </div>
+          <input type="submit" value="Login"/>
+        </form>
       </div>
       <section class="slide_container">
         <div class="slide_wrapper">
