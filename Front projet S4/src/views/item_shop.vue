@@ -80,14 +80,6 @@
 </template>
 
 <style scoped>
-    /* Container for the input and items */
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
 
     main {
         display: flex;
