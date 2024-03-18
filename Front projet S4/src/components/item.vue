@@ -1,5 +1,9 @@
 <script setup>
-    const props = defineProps(["name", "tags", "prix", "image"])
+    import calendar from './calendar_item.vue'  
+    import { ref, watch } from 'vue'
+
+    const props = defineProps(["id", "name", "tags", "prix", "image"])
+    const showCal = ref(false)
 </script>
 
 <template>
@@ -14,7 +18,8 @@
             </div>
             <p class="item-price">{{props.prix}}€/jour</p>
         </div>
-    </div>
+        <button v-on:click = "showCal = !showCal" class = "calendar-button">Calendar</button>
+        <calendar :id="props.id" class = "calendar" v-if ="showCal"></calendar>    </div>
 </template>
 
 <style scoped>

@@ -1,6 +1,13 @@
 <script setup>
 
 import { ref, onMounted } from 'vue';
+import { useRouter } from "vue-router";
+import { useUserStore } from "./../stores/user";
+
+
+const router = useRouter();
+
+const props = defineProps(["id"])
 
 const currentDateVar = ref(new Date());
 const calendar = ref([[]]);
@@ -11,7 +18,7 @@ const currentYear = ref(currentDateVar.value.getFullYear());
 const currentMonth = ref(currentDateVar.value.getMonth());
 const currentDate = ref(currentDateVar.value);
 const nextDate = ref(-1);
-const unavailableDates = ref([[new Date(2024, 2, 15), 5], [new Date(2024, 2, 28), 2]]);
+const unavailableDates = ref([]);
 const validDate = ref(true);
 const items = ref([]);
 const user = ref(NaN);
@@ -23,8 +30,48 @@ const com = ref("");
 const petit_d = ref(0);
 const clicked = ref(false);
 const dureeMax = ref(7);
+const choixReservation = ref(false);
+
+if (props.id != null){
+  choixReservation.value = true
+  recuperedate();
+}
 
 
+async function reservation(){
+  console.log(startDate.value, endDate.value)
+  await fetch("http://51.68.91.213/info9/Back/reservations/reserve_product.php",{
+    credentials: 'include',
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    body: JSON.stringify({
+	  "id_product": props.id,
+    "start_date": formatDateToString(startDate.value),
+    "end_date": formatDateToString(endDate.value)
+  })
+  })
+  router.push("remerciement")
+
+}
+function datesDiff(a, b) {
+  a = a.getTime();
+  b = (b || new Date()).getTime();
+  var c = a > b ? a : b,
+      d = a > b ? b : a;
+  return Math.abs(Math.ceil((c - d) / 86400000));
+}
+
+async function recuperedate(){
+  await fetch("http://51.68.91.213/info9/Back/reservations/get_reservations_product.php?id=" + props.id,{
+    credentials: 'include'
+  }).then((Response)=>{
+    return Response.json()
+  }).then((data)=>{
+    data.forEach(reservation => {
+      unavailableDates.value.push([new Date(reservation.start_date), datesDiff(new Date(reservation.start_date), new Date(reservation.end_date)) + 1])
+    });
+    console.log(unavailableDates.value)
+  })
+}
 function insert_resa() {
   if (endDate.value && validDate.value && petit_d.value !== 2 && parseInt(nb_p.value) <= chambre_actuelle.value["capacite"]) {
     const new_id = new_id(resa_chambres.value, "id_resa_hotel");
@@ -487,34 +534,56 @@ function stringToDate(dateString) {
   return convertedDate;
 }
 
+function formatDateToString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Ajoute un zéro devant si le mois est < 10
+  const day = String(date.getDate()).padStart(2, '0'); // Ajoute un zéro devant si le jour est < 10
+  return `${year}-${month}-${day}`;
+}
+
 generateCalendar();
 </script>
 
 
 <template>
-<div class=resa>
-    <div class="year-name">{{ currentYear }}</div><br>
-    <!-- Contrôles pour changer de mois et nom du mois-->
-    <div class="controls">
-        <button class="green" @click="decrementMonth">&lt;</button>
-        <div v-if="calendar[currentMonth]" class="month-name">{{ calendar[currentMonth].id }}</div>
-        <button class="green" @click="incrementMonth">&gt;</button>
-    </div>
-    <!-- Jours numérotés du calendrier-->
-    <div class="calendar">
-        <div v-if="calendar[currentMonth]" v-for="day in calendar[currentMonth].days" :key="day.id" @click="selectDate(day)" :class="{ selected: day.selected, highlighted: highlightRange(day) && validDate, invalid: highlightRange(day) && !validDate, available: disponible(day), unavailable: day.available }">
-            <div class="day">{{ day.value }}</div>
-        </div>
-        <div v-else>
-            Calendrier n'est pas défini ou vide
-        </div>
-    </div>
-    <div class="reinitialise" @click="resetSelection"> <span class="resetbutton">Réinitialiser</span> </div>
-    <p v-if="!estInferieurA()" class="errorCalendar"> Veuillez choisir une durée de moins de 7 jours</p>
-</div>
+  <div class=resa>
+      <div class="year-name">{{ currentYear }}</div><br>
+      <!-- Contrôles pour changer de mois et nom du mois-->
+      <div class="controls">
+          <button class="green" @click="decrementMonth">&lt;</button>
+          <div v-if="calendar[currentMonth]" class="month-name">{{ calendar[currentMonth].id }}</div>
+          <button class="green" @click="incrementMonth">&gt;</button>
+      </div>
+      <!-- Jours numérotés du calendrier-->
+      <div class="calendar">
+          <div v-if="calendar[currentMonth]" v-for="day in calendar[currentMonth].days" :key="day.id" @click="selectDate(day)" :class="{ selected: day.selected, highlighted: highlightRange(day) && validDate, invalid: highlightRange(day) && !validDate, available: disponible(day), unavailable: day.available }">
+              <div class="day">{{ day.value }}</div>
+          </div>
+          <div v-else>
+              Calendrier n'est pas défini ou vide
+          </div>
+      </div>
+      <div class="reinitialise" @click="resetSelection"> <span class="resetbutton">Réinitialiser</span> </div>
+      <p v-if="!estInferieurA()" class="errorCalendar"> Veuillez choisir une durée de moins de 7 jours</p>
+      <button v-if="choixReservation&!estInferieurA()" class="reservationImpossible">Reserver</button>
+      <button v-if="choixReservation&estInferieurA()" @click="reservation" class="reservationPossible">Reserver</button>
+  </div>
 </template>
 
 <style scoped>
+.reservationImpossible{
+  background-color: red;
+}
+.reservationPossible{
+  background-color: green;
+}
+.resa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: yellow;
+}
 
 .year-name {
   font-size: 18px;

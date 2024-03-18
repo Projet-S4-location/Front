@@ -69,7 +69,7 @@
     </div>
     <main>
         <div v-for ="studio in displaystudios">
-            <item :name = "studio['name']" :tags = "studio['tags']" :prix = "studio['price']" :image = "studio['image']"></item>
+            <item :id="studio['id_product']" :name = "studio['name']" :tags = "studio['tags']" :prix = "studio['price']" :image = "studio['image']"></item>
         </div>
         </main>
         <pied></pied>

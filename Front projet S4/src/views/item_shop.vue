@@ -36,6 +36,7 @@
         tags.value = await res2.json()
 
         displayitems.value = items.value;
+        
 
     }
 
@@ -101,7 +102,7 @@
     </div>
     <main>
         <div v-for="item in displayitems" :key="item.id_product">
-            <item :name="item.name" :tags="item.tags" :prix="item.price" :image="item.image" class="item"></item>
+            <item :id="item.id_product" :name="item.name" :tags="item.tags" :prix="item.price" :image="item.image" class="item"></item>
         </div>
         <div v-if = "!displayitems " class="loading">
             Chargement...
